@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/change.css">
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/admin/{id}(id=${person.getId()})}" th:object="${person}">
+    <label for="username">Введите имя пользователя</label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <br/>
+    <label for="Confines">Введите ограничение</label>
+    <input type="text" th:field="*{confines}" id="Confines"/>
+    <br/>
+    <label for="User_role">Введите роль</label>
+    <input type="text" th:field="*{user_role}" id="User_role"/>
+    <br/>
+    <input type="submit" value="изменить!">
+</form>
+</body>
+</html>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(to right, #3498db, #2ecc71);
+    }
+
+    form {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    input {
+        width: calc(100% - 16px);
+        padding: 10px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    /* Optional: Style for validation errors */
+    input:invalid {
+        border-color: #ff7f7f;
+    }
+
+    /* Optional: Style for different input types */
+    input[type="text"] {
+        /* Add specific styles for text inputs if needed */
+    }
+
+    input[type="password"] {
+        /* Add specific styles for password inputs if needed */
+    }
+</style>

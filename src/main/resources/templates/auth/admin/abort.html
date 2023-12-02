@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a>анализ операций за текущий и прошлый день</a>
+<br/>
+<a th:href="@{/admin/}"> вернуться к логам</a>
+<br/>
+   <a th:text="${'количество операция за прошлый день ' +j + 'оборот денег за прошлый день' +money1}"></a>
+    <br/>
+    <a th:text="${'количество операция за текущий день-'+i +' оборот денег за прошлый день' +money0}"></a>
+    <br/>
+<hr class="full-width-line">
+<a> операции текущего дня</a>
+<div th:each="person: ${operations1}">
+
+      <a th:text="${person.getSell()} + '-проданная валюта за одну операцию .'+ ${person.getBuy()}  + '-купленная валюта за одну операцию' ">user</a>
+   <br/>
+    <a th:text="${person.getOperation_Date()}">user</a>
+    <br/>
+    <br/>
+</div>
+<hr class="full-width-line">
+<a> операции прошлого дня</a>
+<div th:each="person: ${operations2}">
+
+    <a th:text="${person.getSell()} + '-проданная валюта за одну операцию .'+ ${person.getBuy()}  + '-купленная валюта за одну операцию' ">user</a>
+    <br/>
+    <a th:text="${person.getOperation_Date()}">user</a>
+    <br/>
+    <br/>
+</div>
+</body>
+<style>
+body {
+font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #3498db, #2ecc71); /* Градиент от синего к зеленому */
+
+margin: 0;
+padding: 0;
+}
+
+.container {
+max-width: 800px;
+margin: 20px auto;
+background-color: #fff; /* Цвет контейнера */
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container a {
+color: #007bff; /* Цвет ссылок */
+text-decoration: none;
+}
+
+.container a:hover {
+text-decoration: underline;
+}
+
+.full-width-line {
+border: 1px solid #ccc; /* Цвет линии */
+margin: 20px 0; /* Отступы для линии */
+}
+</style>
+</html>

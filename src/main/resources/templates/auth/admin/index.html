@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+<div th:object="${pers}">
+    <h3 th:text="*{username}"></h3>
+    <br/>
+    <h3 th:text="*{confines}"></h3>
+    <br/>
+    <a th:href="@{/admin/{id}/change(id=${pers.getId()})}" th:text="change">change</a>
+    <br/>
+</div>
+</body>
+</html>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(to right, #3498db, #2ecc71); /* Градиент от синего к зеленому */
+    }
+
+    div {
+        background: rgba(255, 255, 255, 0.9); /* Прозрачный белый фон для контраста с градиентом */
+        color: #fff; /* Белый текст для контраста */
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        text-align: center;
+        margin: 20px; /* Увеличение отступа для выделения от фона */
+    }
+
+    h3 {
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    h3:nth-child(odd) {
+        color: #3498db; /* Синий цвет для нечетных заголовков */
+    }
+
+    h3:nth-child(even) {
+        color: #2ecc71; /* Зеленый цвет для четных заголовков */
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #e74c3c; /* Красный цвет для ссылки */
+        color: #fff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+        background-color: #c0392b; /* Темно-красный при наведении */
+    }
+</style>

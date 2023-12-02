@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/newday.css">
+</head>
+<body>
+<form th:method="POST" th:action="@{/admin/newday}" th:object="${currency}">
+    <label for="*{buy_dollar}">Введите курс евро к рублю</label>
+    <input type="text" th:field="*{buy_dollar}" id="*{buy_dollar}"/>
+    <br/>
+    <label for="*{buy_euro}">Введите курс доллара к рублю</label>
+    <input type="text" th:field="*{buy_euro}" id="*{buy_euro}"/>
+    <br/>
+    <label for="*{sell_dollar}">Введите курс доллара к рублю</label>
+    <input type="text" th:field="*{sell_dollar}" id="*{sell_dollar}"/>
+    <br/>
+    <label for="sell_euro">Введите курс евро к рублю</label>
+    <input type="text" th:field="*{sell_euro}" id="sell_euro"/>
+
+    <br/>
+    <input type="submit" value="Новый денб">
+</form>
+</body>
+</html>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #3498db, #2ecc71); /* Градиент от синего к зеленому */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    form {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    input {
+        width: calc(100% - 16px);
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    /* Optional: Style for validation errors */
+    input:invalid {
+        border-color: #ff7f7f;
+    }
+</style>

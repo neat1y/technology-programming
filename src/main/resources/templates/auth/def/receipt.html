@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h5 th:text="Чек"/>
+    <h5 th:object="${kurs}"  th:text="*{'Курс продажи доллара к рублю ' +sell_dollar + ' Курс продажи евро к рублю  ' +sell_euro+' дата курса '+currencyDate }"/>
+    <br/>
+    <h5 th:object="${kurs}"  th:text="*{'Курс покупки доллара к рублю ' +buy_dollar + ' Курс покупки евро к рублю  ' +buy_euro+' дата курса '+currencyDate }"/>
+    <br/>
+    <h6 th:object="${person}" th:text="*{'Имя тот кто производил операцию ' + get().username}"/>
+    <br/>
+    <h6 th:object="${operations}" th:text="*{'Купил валюты ' +getBuy() +' Продал валюты ' + getSell()}"/>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #2196F3, #00BCD4); /* Градиентный фон от синего к бирюзовому */
+        color: #ffffff; /* Белый текст на градиентном фоне */
+        padding: 20px;
+    }
+
+    h5 {
+        background: linear-gradient(to right, #6DD5FA, #2980B9); /* Градиентный фон от фиолетового к розовому */
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        color: #ffffff; /* Белый текст на градиентном фоне */
+    }
+    h6 {
+        background: linear-gradient(to right, #6DD5FA, #2980B9); /* Градиентный фон от фиолетового к розовому */
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        color: #ffffff; /* Белый текст на градиентном фоне */
+    }
+
+</style>

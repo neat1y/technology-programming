@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br/>
+<a th:href="@{/admin/receipt/analiz}">analiz</a>
+<hr class="full-width-line">
+<div th:each="operarion: ${operarions}" >
+    <a th:text="${'оперпция продажи ' +operarion.getSell() +' сколько проданно долларов-' +operarion.getDollar()+' сколько проданно евро-' +operarion.getEuro()}">user</a>
+    <br/>
+    <a th:text="${' операция покупки ' +operarion.getBuy()+' сколько куплено долларов' +operarion.getDollar()+' сколько куплено евро' +operarion.getEuro()}">user</a>
+    <br/>
+    <a th:text="${operarion.getOperation_Date()}"/>
+    <br/>
+    <a th:text="${operarion.person.getUsername()}"/>
+    <br/>
+    <hr class="full-width-line">
+</div>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #3498db, #2ecc71);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* Цвет контейнера */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container a {
+        color: #007bff; /* Цвет ссылок */
+        text-decoration: none;
+    }
+
+    .container a:hover {
+        text-decoration: underline;
+    }
+    .full-width-line {
+        border: 1px solid #ccc; /* Цвет линии */
+        margin: 0;
+    }
+</style>
+</html>
