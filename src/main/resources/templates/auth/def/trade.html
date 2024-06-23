@@ -2,7 +2,82 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Exchange Rate</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(to right, #5e5e5e, #333);
+            color: #fff;
+        }
+
+        div,
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        h3 {
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        #totalAmount {
+            font-size: 18px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                width: 80%;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,7 +95,7 @@
     <br/>
 
 </div>
-<form th:method="POST" th:action="@{/operations}" th:object="${person}"  th:object1="${value}">
+<form th:method="POST" th:action="@{/operations}" th:object="${person}" th:object1="${value}" onsubmit="return validateForm()">
     <div>
 
         <label for="choose">Покупка или продажа</label>
@@ -29,82 +104,50 @@
             <option value="buy">buy</option>
         </select>
         <label for="value">Выбор валюты</label>
-        <select id="value" name="value">
+        <select id="value" name="value" onchange="calculateTotal()">
             <option value="euro">euro</option>
             <option value="dollar">dollar</option>
         </select>
         <label for="money">Введите сумму</label>
-        <input type="text" id="money" name="money" />
+        <input type="text" id="money" name="money" oninput="calculateTotal()" />
         <input type="hidden" id="id" name="id" th:value="*{id}"/>
-         <input type="submit" value="Submit">
+        <input type="submit" value="Submit">
+        <p id="totalAmount">Сумма для покупателя: 0</p>
     </div>
 </form>
+
+<script th:inline="javascript">
+    /* Получение курса продажи евро из Thymeleaf */
+    var sellEuroRate = /*[[${sell_euro}]]*/;
+    /* Получение курса продажи доллара из Thymeleaf */
+    var sellDollarRate = /*[[${sell_dollar}]]*/;
+
+    function validateForm() {
+        var moneyInput = document.getElementById("money").value;
+        if (moneyInput === "") {
+            alert("Введите сумму перед отправкой формы");
+            return false;
+        }
+        return true;
+    }
+
+    function calculateTotal() {
+        var moneyInput = document.getElementById("money").value;
+        var currencyType = document.getElementById("value").value;
+        var exchangeRate;
+
+        // Получение курса валюты в зависимости от выбранного типа
+        if (currencyType === "euro") {
+            exchangeRate = sellEuroRate;
+        } else {
+            exchangeRate = sellDollarRate;
+        }
+
+        // Расчет суммы для покупателя
+        var totalAmount = parseFloat(moneyInput) * exchangeRate;
+        document.getElementById("totalAmount").innerText = "Сумма для покупателя: " + totalAmount.toFixed(2);
+    }
+</script>
+
 </body>
 </html>
-<style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        height: 100vh;
-        background: linear-gradient(to right, #3498db, #2ecc71); /* Градиент от синего к зеленому */
-    }
-
-    div,
-    form {
-        background-color: rgba(255, 255, 255, 0.9); /* Прозрачный белый фон для контраста с градиентом */
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    h3 {
-        margin: 10px 0;
-        color: #333;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 10px;
-        color: #333;
-        font-weight: bold;
-    }
-
-    select,
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #fff; /* Белый фон для элементов формы */
-    }
-
-    input[type="submit"] {
-        background-color: #3498db;
-        color: #fff;
-        cursor: pointer;
-        border: none;
-        padding: 12px;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #2980b9;
-    }
-
-    /* Optional: Responsive design for smaller screens */
-    @media (max-width: 600px) {
-        form {
-            width: 80%;
-        }
-    }
-</style>
